@@ -4,6 +4,6 @@
 
 >这个项目来源于Udacity前端开发工程师进阶课程，具体内容请参考[这里](https://cn.udacity.com/course/front-end-web-developer-nanodegree--nd001-cn-advanced)
 
-##参考
+## 参考
 
 Jquery API [w3c school](http://www.w3school.com.cn/)
