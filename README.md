@@ -7,3 +7,5 @@
 ## 参考
 
 Jquery API [w3c school](http://www.w3school.com.cn/)
+
+[udacity论坛上](http://discussions.youdaxue.com/t/topic/54114)的`done()`
