@@ -21,24 +21,26 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
+        function checkEmpty(item) {
+            expect(item).toBeDefined();
+            expect(item).not.toBe('');
+        }
+
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         it('each feed has a URL',function(){
             for(feed of allFeeds){
-                expect(feed.url).toBeDefined();
-                expect(feed.url).not.toBe('');
+                checkEmpty(feed.url);
             }
         });
 
 
         it('each feed has a name', function () {
             for (feed of allFeeds) {
-                expect(feed.name).toBeDefined();
-                expect(feed.name).not.toBe('');
+                checkEmpty(feed.name);
             }
         });
     });
@@ -66,33 +68,31 @@ $(function() {
 
     describe('Initial Entries', function () {
         beforeEach(function (done) {
-            loadFeed(0,function () {
-                done();
-            });
+            loadFeed(0,done);
         });
 
         //检测是否存在含有.entry元素的.feed元素
-        it('has at least a single .entry element', function (done) {
+        it('has at least a single .entry element', function () {
             expect($('.feed').has('.entry').length != 0).toBe(true);
-            done();
         })
     });
 
     describe('New Feed Selection', function () {
         //保存原来的entry
-        var defaultEntry;
+        var oldEntry,newEntry;
         beforeEach(function (done) {
-            defaultEntry = $('.feed').html();
             loadFeed(1, function () {
-                done();
+                oldEntry = $('.feed').html();
+                loadFeed(0,function(){
+                    newEntry = $('.feed').html();
+                    done();
+                });
             });
         });
 
         //对比原来的entry和loadFeed之后的entry
-        it('content actually changes', function (done) {
-            var newEntry = $('.feed').html();
-            expect(defaultEntry == newEntry).toBe(false);
-            done();
+        it('content actually changes', function () {
+            expect(oldEntry == newEntry).toBe(false);
         })
     });
 }());
